@@ -21,23 +21,22 @@ logging.basicConfig(level=logging.DEBUG, filename='bloqueador.log',
 # Caminho do arquivo de blacklist
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))
 
-# Cores da interface
-co0 = "#f0f3f5" # Cinza claro
-co1 = "#feffff" # Branco
-co2 = "#3fb5a3" # Verde
-co3 = "#f25f5c" # Vermelho
-co4 = "#403d3d" # Preto
-
-azul_color = "#3f9dfb"  # Azul para o botão
-green_color = "#3fb5a3"  # Verde para o botão
-white_color = "#ffffff"  # Branco para a fonte
-orange_color = "orange"  # Laranja para o botão
+class Cores:
+    CO0 = "#f0f3f5"  # Cinza claro
+    CO1 = "#feffff"  # Branco
+    CO2 = "#3fb5a3"  # Verde
+    CO3 = "#f25f5c"  # Vermelho
+    CO4 = "#403d3d"  # Preto
+    AZUL = "#3f9dfb"  # Azul para o botão
+    VERDE = "#3fb5a3"  # Verde para o botão
+    BRANCO = "#ffffff"  # Branco para a fonte
+    LARANJA = "orange"  # Laranja para o botão
 
 # Configuração da janela principal
 janela = tk.Tk()
 janela.title("Bloqueador de Apostas")
 janela.geometry("410x460")  # Aumente a altura da janela para a barra de progresso
-janela.configure(background=co1)
+janela.configure(background=Cores.CO1)
 janela.resizable(width=False, height=False)
 
 # Caminho do arquivo de blacklist
@@ -115,10 +114,10 @@ def bloquear_por_dominio(dominio):
         return False
 
 # Frames
-frame_logo = tk.Frame(janela, width=410, height=60, bg=co1, relief="flat")
+frame_logo = tk.Frame(janela, width=410, height=60, bg=Cores.CO1, relief="flat")
 frame_logo.grid(row=0, column=0, columnspan=2, sticky="nsew")
 
-frame_corpo = tk.Frame(janela, width=410, height=400, bg=co1, relief="flat")
+frame_corpo = tk.Frame(janela, width=410, height=400, bg=Cores.CO1, relief="flat")
 frame_corpo.grid(row=1, column=0, columnspan=2, sticky="nsew")
 
 # Configurando frame logo
@@ -126,10 +125,10 @@ imagem = Image.open(os.path.join(diretorio_atual, "assets/block.png"))
 imagem = imagem.resize((40, 40))
 image = ImageTk.PhotoImage(imagem)
 
-l_image = tk.Label(frame_logo, height=60, image=image, bg=co1)
+l_image = tk.Label(frame_logo, height=60, image=image, bg=Cores.CO1)
 l_image.place(x=20, y=0)
 
-l_logo = tk.Label(frame_logo, text="Bloqueador de Apostas", height=1, anchor="ne", font=('Ivy', 20), bg=co1, fg=co4)
+l_logo = tk.Label(frame_logo, text="Bloqueador de Apostas", height=1, anchor="ne", font=('Ivy', 20), bg=Cores.CO1, fg=Cores.CO4)
 l_logo.place(x=70, y=12)
 
 l_linha = tk.Label(
@@ -139,7 +138,7 @@ l_linha = tk.Label(
     width="445", 
     anchor="nw", 
     font=('Ivy', 1), 
-    bg=co2
+    bg=Cores.CO2
 )
 l_linha.place(x=0, y=57)
 
@@ -148,8 +147,8 @@ l_blacklist = tk.Label(
     frame_corpo, 
     text="Lista de bets bloqueadas", 
     height=1, font=('Ivy', 12),
-    bg=co1, 
-    fg=co4, 
+    bg=Cores.CO1, 
+    fg=Cores.CO4, 
     anchor="w", 
     justify="left",
     wraplength=380
@@ -158,7 +157,7 @@ l_blacklist.place(x=18, y=20)
 
 # Lista de sites bloqueados
 lista = tk.Listbox(
-    frame_corpo, width=40, height=14, bg=co0, fg=co4
+    frame_corpo, width=40, height=14, bg=Cores.CO0, fg=Cores.CO4
 )
 lista.place(x=20, y=50)
 
@@ -174,8 +173,8 @@ checkbox = tk.Checkbutton(
     frame_corpo,
     text="Ao clicar em 'Bloquear Sites', você concorda em comunicar a sua rede de apoio possíveis situações de jogo compulsivo.",
     variable=checkbox_var,
-    bg=co1,
-    fg=co4,
+    bg=Cores.CO1,
+    fg=Cores.CO4,
     font=('Ivy', 8),
     wraplength=380,
     anchor="w",
@@ -186,21 +185,21 @@ checkbox.place(x=16, y=290)
 # Botão de bloquear site
 b_bloquear = tk.Button(
     frame_corpo, text="Bloquear Firewall", width=15, height=2,
-    bg=green_color, fg=white_color, command=lambda: bloquear_sites(checkbox_var, lista, progresso, janela), relief="flat"
+    bg=Cores.VERDE, fg=Cores.BRANCO, command=lambda: bloquear_sites(checkbox_var, lista, progresso, janela), relief="flat"
 )
 b_bloquear.place(x=270, y=50)
 
 # Chame a função copiar_hosts em algum lugar do seu código, como em um botão
 botao_copiar_hosts = tk.Button(
     frame_corpo, text="Bloquear DNS", width=15, height=2,
-    bg=azul_color, fg=white_color, command=copiar_hosts, relief="flat"
+    bg=Cores.AZUL, fg=Cores.BRANCO, command=copiar_hosts, relief="flat"
 )
 botao_copiar_hosts.place(x=270, y=100)
 
 # Chame a função copiar_hosts em algum lugar do seu código, como em um botão
 botao_apoio = tk.Button(
     frame_corpo, text="Configurações", width=15, height=2,
-    bg=orange_color, fg=white_color, relief="flat"
+    bg=Cores.LARANJA, fg=Cores.BRANCO, relief="flat"
 )
 botao_apoio.place(x=270, y=150)
 
