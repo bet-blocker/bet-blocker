@@ -29,9 +29,7 @@ class AppInitializer:
     def __init__(self):
         # Setup main app window
         self.app_window = tk.Tk()
-        self.app_window.title(
-            "Bloqueador de Apostas"
-        )  # Corrigido para setar o título corretamente
+        self.app_window.title("Bloqueador de Apostas")
         self.app_window.geometry("410x470")
         self.app_window.configure(background=AppColors.CINZA_CLARO.value)
         self.app_window.resizable(width=False, height=False)
@@ -67,29 +65,21 @@ class AppInitializer:
 
     def run(self):
         self.app_window.focus_force()
-
         self.app_window.after(100, lambda: logger.info("Bem-vindo(a) ao Bloqueador de Bets. A aplicação está em execução."))
-
         self.app_window.mainloop()
-
         logger.info("Aplicação encerrada.")
 
     def get_or_create_blocklist_path(self):
         file_path = get_path_from_context("blocklist.txt")
-
         if not os.path.exists(file_path):
             with open(file_path, "w") as file:
                 file.write("")
-
         return file_path
 
     def setup_frame_logo(self):
         # Logo image
         logo = Image.open(get_path_from_context("assets/block.png")).resize((40, 40))
-        self.logo_image = ImageTk.PhotoImage(
-            logo
-        )  # Guarda a imagem como atributo da classe
-
+        self.logo_image = ImageTk.PhotoImage(logo)
         app_label_img = tk.Label(
             self.app_frame_logo,
             height=60,
@@ -190,20 +180,46 @@ class AppInitializer:
             command=copy_hosts,
             relief="flat",
         )
-        copy_hosts_button.place(
-            x=270, y=100
-        )  # Mantém a posição correta para evitar sobreposição
+        copy_hosts_button.place(x=270, y=100)
 
         support_button = tk.Button(
             self.app_frame_body,
-            text="Configurações",
+            text="Rede de apoio",
             width=15,
             height=2,
             bg=AppButtonColors.LARANJA.value,
             fg=AppColors.BRANCO.value,
+            command=self.setup_support_screen,  # Chama a função de suporte
             relief="flat",
         )
-        support_button.place(x=270, y=148)  # Ajustado para evitar sobreposição
+        support_button.place(x=270, y=148)
+
+    def setup_support_screen(self):
+        # Nova janela para a tela de rede de apoio
+        support_window = tk.Toplevel(self.app_window)
+        support_window.title("Rede de Apoio")
+        support_window.geometry("400x200")
+        support_window.configure(bg=AppColors.CINZA_CLARO.value)
+
+        # Lista
+        support_listbox = tk.Listbox(support_window, width=30, height=5)
+        support_listbox.pack(pady=10)
+
+        # Botões
+        btn_editar = tk.Button(
+            support_window, text="Editar", width=10, bg=AppColors.VERDE.value
+        )
+        btn_editar.pack(side="left", padx=10)
+
+        btn_deletar = tk.Button(
+            support_window, text="Deletar", width=10, bg=AppColors.VERMELHO.value
+        )
+        btn_deletar.pack(side="left", padx=10)
+
+        btn_excluir = tk.Button(
+            support_window, text="Excluir", width=10, bg=AppColors.VERMELHO.value
+        )
+        btn_excluir.pack(side="left", padx=10)
 
     def get_sites_from_blocklist(self) -> list:
         with open(self.blocklist_path, "r") as file:
@@ -211,7 +227,7 @@ class AppInitializer:
         return [site.strip() for site in sites if site.strip()]
 
 
-## Auxiliares
+# Funções auxiliares
 def request_admin_grant():
     if ctypes.windll.shell32.IsUserAnAdmin():
         return True
