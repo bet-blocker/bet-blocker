@@ -4,6 +4,13 @@
   <img src="https://github.com/user-attachments/assets/7efbc8f9-8fe4-429e-8bae-1c6efa3a4453" alt="screen-home" width="1200">
 </p>
 
+[![Star on GitHub](https://img.shields.io/github/stars/jhowbhz/bet-blocker.svg?style=social)](https://github.com/jhowbhz/bet-blocker/stargazers)
+<a href="https://github.com/jhowbhz/apigratis-sdk-php/network" target="_blank"><img alt="GitHub forks" src="https://img.shields.io/github/forks/jhowbhz/bet-blocker"></a>
+<a href="https://github.com/jhowbhz/bet-blocker/issues" target="_blank"><img alt="GitHub issues" src="https://img.shields.io/github/issues/jhowbhz/bet-blocker"></a>
+[![GitHub tag](https://img.shields.io/github/tag/jhowbhz/bet-blocker)](https://github.com/jhowbhz/bet-blocker/releases/?include_prereleases&sort=semver "View GitHub releases")
+[![Minimum Python Version](https://img.shields.io/badge/python-%3E%3D%203.0-8892BF.svg?style=flat-square)](https://python.org/)
+[![License](https://img.shields.io/badge/License-MIT-blue)](#license "Go to license section")
+
 A ideia deste repositório é criar um software focado em bloquear e impedir o acesso a sites de apostas. Essa ferramenta foi criada para ajudar pessoas que desejam se proteger contra os efeitos nocivos do vício em apostas online, oferecendo uma camada de proteção que limita o acesso a plataformas de jogos de azar.
 
 ## Objetivo
