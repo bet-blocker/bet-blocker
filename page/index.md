@@ -25,5 +25,7 @@ O Bet Blocker é uma ferramenta criada para bloquear acessos a sites de apostas,
 Para instalar e usar o Bet Blocker, siga os passos:
 
 1. Clone o repositório:  
-   ```bash
-   git clone https://github.com/jhowbhz/bet-blocker.git
+
+```bash
+git clone https://github.com/jhowbhz/bet-blocker.git
+```
