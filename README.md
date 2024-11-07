@@ -43,6 +43,7 @@ Atualmente, essa solução está em fase de Prova de Conceito (POC) e foi desenv
 Acredita que pode ajudar a evoluir essa ideia? Caso sim, sinta-se à vontade para fazer uma pull request seguindo os passos a seguir:
 
  Crie um fork do repositório:
+ <br>
 ![fork](https://github.com/user-attachments/assets/40a18cf5-031e-4134-bd73-e87cf22b57aa)
 
 Clone o seu fork:
@@ -50,8 +51,8 @@ Clone o seu fork:
   git clone link_do_seu_repositório
 ```
 Navegue até o diretório do projeto e instale as dependências:
-```bash
-cd bet-blocker && pip install -r requirements.txt
+```
+  cd bet-blocker && pip install -r requirements.txt
 ```
 
 Crie uma nova branch:
@@ -74,9 +75,11 @@ Puxe as alterações para o seu repositório:
 ```
 
 Abra uma nova Pull Request:
+<br>
 ![pr](https://github.com/user-attachments/assets/0fb5947b-2a31-4240-b00d-12c9de24eee7)
 
 Adicione um título e descrição para sua Pull Request:
+<br>
 ![submmit](https://github.com/user-attachments/assets/a30c6f0a-8752-43c4-965a-279220b01279)
 
 Feito, agora é só esperar para que sua Pull Request seja aceita, ou se caso seja encontrado algum erro de compatibilidade com o estado atual do projeto, ou qualquer outro problema, será adicionado um comentário e sua Pull Request será fechada. Sinta-se à vontade para abrir outra novamente e contribuir para o projeto.
