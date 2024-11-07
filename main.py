@@ -1,5 +1,7 @@
-from app import AppInitializer
+from app.__init__ import AppConfig
+from app.__init__ import AppInitializer
 
 if __name__ == "__main__":
-    app = AppInitializer()
+    config = AppConfig()
+    app = AppInitializer(config)
     app.run()

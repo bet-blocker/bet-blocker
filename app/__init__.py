@@ -2,36 +2,20 @@ import os, sys
 import platform
 import ctypes
 import shutil
-from enum import Enum
-
 import tkinter as tk
+
 from tkinter import BooleanVar, ttk, messagebox
 from PIL import Image, ImageTk
-
 from src.utils.get_paths import get_path_from_context
 from src.functions.blocker import restrict_sites
 from src.utils.logs import logger
-
-class AppColors(Enum):
-    CINZA_CLARO = "#f0f3f5"
-    BRANCO = "#feffff"
-    VERDE = "#3fb5a3"
-    VERMELHO = "#f25f5c"
-    PRETO = "#403d3d"
-
-class AppButtonColors(Enum):
-    AZUL = "#3f9dfb"
-    VERDE = "#3fb5a3"
-    BRANCO = "#ffffff"
-    LARANJA = "orange"
+from app.app_styles import AppConfig, AppColors, AppButtonColors
 
 class AppInitializer:
-    def __init__(self):
-        # Setup main app window
+    def __init__(self, config: AppConfig):
+        self.config = config
         self.app_window = tk.Tk()
-        self.app_window.title(
-            "Bloqueador de Apostas"
-        )  # Corrigido para setar o título corretamente
+        self.app_window.title("Bloqueador de Apostas")
         self.app_window.geometry("410x470")
         self.app_window.configure(background=AppColors.CINZA_CLARO.value)
         self.app_window.resizable(width=False, height=False)
@@ -44,10 +28,9 @@ class AppInitializer:
         self.setup_frame_body()
 
     def setup_frames(self):
-        # Logo Frame
         self.app_frame_logo = tk.Frame(
             self.app_window,
-            width=410,
+            width=self.config.window_width,
             height=60,
             bg=AppColors.CINZA_CLARO.value,
             relief="flat",
@@ -58,37 +41,32 @@ class AppInitializer:
         self.blocklist_path = self.get_or_create_blocklist_path()
         self.app_frame_body = tk.Frame(
             self.app_window,
-            width=410,
-            height=400,
+            width=self.config.window_width,
+            height=self.config.window_height - 60,
             bg=AppColors.CINZA_CLARO.value,
             relief="flat",
         )
         self.app_frame_body.grid(row=1, column=0, columnspan=2, sticky="nsew")
 
     def run(self):
+        """Inicia a execução da aplicação."""
         self.app_window.focus_force()
-
         self.app_window.after(100, lambda: logger.info("Bem-vindo(a) ao Bloqueador de Bets. A aplicação está em execução."))
-
         self.app_window.mainloop()
-
         logger.info("Aplicação encerrada.")
 
     def get_or_create_blocklist_path(self):
+        """Obtém o caminho do arquivo de lista bloqueada e cria caso não exista."""
         file_path = get_path_from_context("blocklist.txt")
-
         if not os.path.exists(file_path):
             with open(file_path, "w") as file:
                 file.write("")
-
         return file_path
 
     def setup_frame_logo(self):
-        # Logo image
+        """Configura o frame de logo na janela principal."""
         logo = Image.open(get_path_from_context("assets/block.png")).resize((40, 40))
-        self.logo_image = ImageTk.PhotoImage(
-            logo
-        )  # Guarda a imagem como atributo da classe
+        self.logo_image = ImageTk.PhotoImage(logo)
 
         app_label_img = tk.Label(
             self.app_frame_logo,
@@ -209,7 +187,6 @@ class AppInitializer:
         with open(self.blocklist_path, "r") as file:
             sites = file.readlines()
         return [site.strip() for site in sites if site.strip()]
-
 
 ## Auxiliares
 def request_admin_grant():
