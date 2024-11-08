@@ -1,15 +1,19 @@
-import os, sys
-import platform
 import ctypes
+import logging
+import os
+import platform
 import shutil
+import sys
 import tkinter as tk
+from tkinter import BooleanVar, messagebox, ttk
 
-from tkinter import BooleanVar, ttk, messagebox
 from PIL import Image, ImageTk
-from src.utils.get_paths import get_path_from_context
+
+from app.app_styles import AppButtonColors, AppColors, AppConfig
 from src.functions.blocker import restrict_sites
+from src.utils.get_paths import get_path_from_context
 from src.utils.logs import logger
-from app.app_styles import AppConfig, AppColors, AppButtonColors
+
 
 class AppInitializer:
     def __init__(self, config: AppConfig):
@@ -51,7 +55,12 @@ class AppInitializer:
     def run(self):
         """Inicia a execução da aplicação."""
         self.app_window.focus_force()
-        self.app_window.after(100, lambda: logger.info("Bem-vindo(a) ao Bloqueador de Bets. A aplicação está em execução."))
+        self.app_window.after(
+            100,
+            lambda: logger.info(
+                "Bem-vindo(a) ao Bloqueador de Bets. A aplicação está em execução."
+            ),
+        )
         self.app_window.mainloop()
         logger.info("Aplicação encerrada.")
 
@@ -188,6 +197,7 @@ class AppInitializer:
             sites = file.readlines()
         return [site.strip() for site in sites if site.strip()]
 
+
 ## Auxiliares
 def request_admin_grant():
     if ctypes.windll.shell32.IsUserAnAdmin():
@@ -198,17 +208,20 @@ def request_admin_grant():
         )
         return False
 
+
 # Requisitar permissão de administrador no Linux
 def request_sudo_grant() -> None:
     # Testando se o usuário executou o processo como root
     if os.geteuid() != 0:
-        os.execvp('sudo', ['sudo', 'python3'] + sys.argv)
+        os.execvp("sudo", ["sudo", "python3"] + sys.argv)
 
     return True
 
+
 # Requisitar permissão de administrador no MacOS
 def request_doas_grant() -> bool:
-    pass # todo
+    pass  # todo
+
 
 def copy_hosts():
     match platform.system():
@@ -222,7 +235,8 @@ def copy_hosts():
             copy_macos_hosts()
 
         case _:
-            print("Sistema operacional não reconhecido!")
+            logging.warning("Sistema operacional não reconhecido!")
+
 
 def copy_windows_hosts():
     """Copia o arquivo ./hosts para C:\Windows\System32\drivers\etc\hosts."""
@@ -234,6 +248,7 @@ def copy_windows_hosts():
         except Exception as e:
             messagebox.showerror("Erro", f"Falha ao copiar o arquivo hosts: {e}")
             logger.error(f"Erro ao copiar o arquivo hosts: {e}")
+
 
 def copy_linux_hosts():
     """Copia o arquivo ./hosts para /etc/hosts"""
@@ -249,6 +264,7 @@ def copy_linux_hosts():
         messagebox.showerror("Erro", f"Falha ao copiar o arquivo hosts: {e}")
         logger.error(f"Erro ao copiar o arquivo hosts: {e}")
 
-# To do
+
+#TODO
 def copy_macos_hosts():
     pass
