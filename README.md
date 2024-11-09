@@ -22,20 +22,20 @@ O BetBlocker foi pensado para que o próprio usuário ou familiares preocupados 
 
 ## Instalação e utilização
 
-1. Clone o repositório para sua máquina:
-    ```bash
-    git clone https://github.com/jhowbhz/bet-blocker.git bet-blocker
-    ```
+Clone o repositório para sua máquina:
+```bash
+git clone https://github.com/jhowbhz/bet-blocker.git bet-blocker
+```
 
-2. Instale as dependencias:
-    ```bash
-    cd bet-blocker && pip install -r requirements.txt
-    ```
+Instale as dependencias:
+```bash
+cd bet-blocker && pip install -r requirements.txt
+```
 
-3. Para rodar o projeto:
-    ```bash
-    python main.py
-    ```
+Para rodar o projeto:
+```bash
+python main.py
+```
 
 ## Funcionamento
 O BetBlocker realiza bloqueios por meio de configurações de firewall e ajustes no arquivo hosts para impedir o acesso a sites de apostas conhecidos. Além disso, oferece uma funcionalidade para configurar uma rede de apoio, uma opção que garante suporte ao usuário caso ele queira desbloquear ou remover o software de proteção em um momento de crise.
